@@ -29,7 +29,7 @@ function getFavMovies() {
       })
     });
    } else {
-    console.log("nema ga");
+    
   }
 }
 
