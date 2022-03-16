@@ -34,8 +34,8 @@ function Movie(props) {
 		<img src={IMAGES_500_URL+props.backdrop_path} className="card-img-top" alt={props.title} />
 		<div className="card-body">
 		<h5 className="card-title">{props.title}</h5>
-		<h6 className="card-title"> Datum: {props.release_date}</h6><br />
-		<h6 className="card-title"> Ocjena: {props.vote_average}</h6><br />
+		<h6 className="card-title"> Date: {props.release_date}</h6><br />
+		<h6 className="card-title"> Vote: {props.vote_average}</h6><br />
 		<p className="card-text">{props.overview}</p>
 		<div className="row row row-cols-1 row-cols-sm-2" >
 		<div className="col">
