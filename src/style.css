@@ -1,0 +1,19 @@
+/**
+
+**/
+
+body {
+  background-color: #141414;
+}
+
+nav .navbar-dark, nav .navbar-brand {
+     color: #e50914 !important;
+}
+
+.col {
+	color: #fff;
+	padding-top: 50px;
+}
+
+
+
