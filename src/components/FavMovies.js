@@ -37,14 +37,14 @@ function getFavMovies() {
 return (
   <React.Fragment>
   <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 ">
-  {favMoviesData ? favMoviesData.map((movie, index) => {
+  {favMoviesData.length > 0 ? favMoviesData.map((movie, index) => {
     return (
       <div key={index} className="col">
        <Movie key={index} id={movie.id} title={movie.original_title} backdrop_path={movie.backdrop_path} release_date={movie.release_date} poster_path={movie.poster_path} overview={movie.overview} vote_average={movie.vote_average}/>
       </div>
       );
 
-    }) : <p> There is no movie </p> }
+    }) : <p> There are no movies </p> }
     </div>
     </React.Fragment>
     );
