@@ -8,8 +8,8 @@ import { format } from 'date-fns';
 function Movie(props) {
 	const favoritesState = useSelector((state) => state.favorites.value);
 	let addRemoveButton;
-	const date = format(Date.parse(props.release_date), 'dd MM yyyy');
 	facoritesCheck(props.id);
+	
 	useEffect(() => {
   		facoritesCheck(props.id)
   	}, [favoritesState]);
@@ -18,9 +18,19 @@ function Movie(props) {
 	//Ukoliko se proslijdi props "modal" dugme za prikaz modala ce biti izrendano
 	const movieIDmodalCall = "#modalInfo"+props.id;
 	const dispatch = useDispatch();
-	
-    
 
+	function formatDate(fDate) {
+			let date = "";
+			let preDate = 0;
+			if (fDate.length > 0) {
+				preDate = Date.parse(props.release_date);
+				date = format(preDate, 'dd MM yyyy');
+			} else {
+				const date = "No date";
+			}
+			return date;
+		}
+	
 	function facoritesCheck(fav) {
 		if (favoritesState.includes(fav)) {
 			addRemoveButton = <button type="button" className="btn btn-primary" onClick={() => {dispatch(removeFromFav(props.id))}}>Remove Fav</button>;
@@ -39,7 +49,7 @@ function Movie(props) {
 		{ props.tagline  &&
 		<h5 className="card-title">{props.tagline}
 		</h5>}
-		<h6 className="card-text"> Date: {date}</h6>
+		<h6 className="card-text"> Date: {formatDate(props.release_date)}</h6>
 		<h6 className="card-text"> Vote: {props.vote_average}</h6>
 		<p className="card-text">{props.overview}</p>
 		{ props.genres  && 
