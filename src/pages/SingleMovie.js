@@ -10,7 +10,7 @@ function SingleMovie() {
 
 	return (
 
-<React.Fragment>{/* Ovaj ovdje fragment  mora ici jer je to neko react pravilo da komponente budu wrapovane div-om ili njim */}
+<>
 
 <Navigation />
 
@@ -18,7 +18,7 @@ function SingleMovie() {
 <Single id="634649"/>
 
 </div>
-</React.Fragment>
+</>
 );
 }
 

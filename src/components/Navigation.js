@@ -1,5 +1,14 @@
 import {   Link  } from "react-router-dom";
-function Navigation() {
+import {useDispatch, useSelector} from "react-redux";
+import {query} from '../reducers/search';
+
+function Navigation(props) {
+    const dispatch = useDispatch();
+    let queryRes = useSelector((state) => state.searchQuery.value);
+
+    function execQuery(val) {
+            dispatch(query(val.target.value))
+    }
   return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -11,6 +20,9 @@ function Navigation() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
     <li className="nav-item">
+    <Link to='/AllMovies' className="nav-link active">All movies</Link>
+    </li>
+    <li className="nav-item">
     <Link to='/popularmovies' className="nav-link active">Popular movies</Link>
     </li>
     <li className="nav-item">
@@ -18,8 +30,9 @@ function Navigation() {
     </li>
     </ul>
     <form className="d-flex">
-    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-    <button className="btn btn-outline-success" type="submit">Search</button>
+    {props.search && 
+    <input onChange={execQuery}  className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+    }
     </form>
     </div>
     </div>

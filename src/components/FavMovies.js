@@ -8,34 +8,28 @@ import {useSelector} from "react-redux";
 
 function FavMovies() {
   const [favMoviesData, setFavMoviesData] = useState([]);
-  const favMovies = useSelector((state) => state.favorites.value);
+  let favMovies = useSelector((state) => state.favorites.value);
   let preState = [];
 
   useEffect(() => {
-     getFavMovies();   
-  }, []);
-
+     getFavMovies();  
+  }, [favMovies]);  
 
 function getFavMovies() {
-   if (favMovies.length > 0) {
-    
+     setFavMoviesData([]);
      favMovies.map((movieID, index) => {
       const fetchUrl = API_URL+MOVIE_URL_PATH+movieID+API_KEY_URL_PATH+API_KEY+LANGUAGE_URL_PATH;
       fetch(fetchUrl)
        .then((res) => res.json())
        .then((res) => {
         preState.push(res);
-        setFavMoviesData([...favMoviesData,...preState]);
+        setFavMoviesData([...preState]);
       })
     });
-   } else {
-    
-  }
 }
 
-
 return (
-  <React.Fragment>
+  <>
   <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 ">
   {favMoviesData.length > 0 ? favMoviesData.map((movie, index) => {
     return (
@@ -44,9 +38,9 @@ return (
       </div>
       );
 
-    }) : <p> There are no movies </p> }
+    }) : <p className="nomovie"> There are no favorite movies </p> }
     </div>
-    </React.Fragment>
+    </>
     );
   }
 

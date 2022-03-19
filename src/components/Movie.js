@@ -4,6 +4,7 @@ import Single from './Single';
 import {useDispatch,  useSelector} from "react-redux";
 import {addToFav, removeFromFav} from '../reducers/favorites';
 import { format } from 'date-fns';
+import noImage from '../img/no-image.jpg';
 
 function Movie(props) {
 	const favoritesState = useSelector((state) => state.favorites.value);
@@ -12,6 +13,7 @@ function Movie(props) {
 	
 	useEffect(() => {
   		facoritesCheck(props.id)
+
   	}, [favoritesState]);
 
   	
@@ -24,7 +26,7 @@ function Movie(props) {
 			let preDate = 0;
 			if (fDate.length > 0) {
 				preDate = Date.parse(props.release_date);
-				date = format(preDate, 'dd MM yyyy');
+				date = format(preDate, 'dd.M.yyyy.');
 			} else {
 				const date = "No date";
 			}
@@ -39,11 +41,14 @@ function Movie(props) {
 		}
 	}
 	return (
-		<React.Fragment>
+		<>
 		<Single id={props.id}  key={props.id}/>
 		<div>
 		<div className="card" >
-		<img src={IMAGES_500_URL+props.backdrop_path} className="card-img-top" alt={props.title} />
+		{props.backdrop_path === null ? 
+			<img src={noImage} className="card-img-top" alt={props.title} /> :
+			<img src={IMAGES_500_URL+props.backdrop_path} className="card-img-top" alt={props.title} />}
+		
 		<div className="card-body">
 		<h5 className="card-title">{props.title}</h5>
 		{ props.tagline  &&
@@ -56,18 +61,16 @@ function Movie(props) {
 			<h6 className="card-title">Genres: 
 			<ul>
 		{props.genres.map((genres, index) => {
-				return (<li>{genres.name}</li>);
+				return (<li key={genres.id}>{genres.name}</li>);
 				 })}
 		</ul></h6>}
-		{ props.budget  &&
-		<h5 className="card-text">Budget: $ {props.budget.toLocaleString()}</h5>}
-		{ props.revenue  &&
-		<h5 className="card-text">Revenue: ${props.revenue.toLocaleString()}</h5>}
+		<h5 className="card-text">Budget: {props.budget > 0 ? "$"+props.budget.toLocaleString() : "No Info"}</h5>
+		<h5 className="card-text">Revenue: {props.budget > 0 ? "$"+props.revenue.toLocaleString() : "No Info"}</h5>
 		{ props.production_companies  && 
 			<h6 className="card-title">Production companies: 
 			<ul>
 		{props.production_companies.map((production_companies, index) => {
-				return (<li>{production_companies.name}</li>);
+				return (<li key={production_companies.id}>{production_companies.name}</li>);
 				 })}
 		</ul></h6>}
 		<div className="row row row-cols-1 row-cols-sm-2" >
@@ -81,7 +84,7 @@ function Movie(props) {
 		</div>
 		</div>
 		</div>
-</React.Fragment>
+		</>
 		);
 	}
 	export default Movie;

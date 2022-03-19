@@ -24,7 +24,7 @@ function Single(props) {
     }
   }
   return (
-    <React.Fragment>
+    <>
     <div className="modal fade" id={movieIDmodal} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog">
     <div className="modal-content">
@@ -36,7 +36,7 @@ function Single(props) {
     </div>
     </div>
     </div>
-    </React.Fragment>
+    </>
     );
 }
 

@@ -3,8 +3,9 @@ import React, {useEffect, useState} from 'react';
 import Movie from './Movie';
 
 function Movies(props) {
-    const [moviesData, setMoviesData] = useState();
+    const [moviesData, setMoviesData] = useState([]);
     const [moviesPage, setMoviesPage] = useState(1);
+     let prePre = [];
     
 useEffect(() => {
   getAllMovies();
@@ -12,7 +13,7 @@ useEffect(() => {
 
 useEffect(() => {
   getAllMovies();
-  }, [moviesPage]);
+  }, [moviesPage, props.fetchUrl]);
 
 function pageUp() {
   setMoviesPage(moviesPage + 1);
@@ -24,10 +25,12 @@ function pageDown() {
   }
 }
 
-
-  function getAllMovies() {
-    
-    fetch(props.fetchUrl+moviesPage)
+  function getAllMovies() {  
+    fetch(props.fetchUrl+moviesPage, {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       } })
       .then((res) => res.json())
       .then((res) => {
         setMoviesData(res.results);
@@ -35,7 +38,7 @@ function pageDown() {
   }
 
   return (
-    <React.Fragment>
+    <>
     <div className="row row-cols-3 page">
     <div className="col">
     <button onClick={pageDown} type="button" className="btn btn-danger">Prev page</button>
@@ -55,7 +58,7 @@ function pageDown() {
           <Movie key={index} id={movie.id} title={movie.original_title} backdrop_path={movie.backdrop_path} release_date={movie.release_date} poster_path={movie.poster_path} overview={overviewTrimmed} vote_average={movie.vote_average}/>
           </div>
         );
-      }) : <p> There is no movie </p> }
+      }) : <p className="nomovie"> There are no movies or you didn't type anything in search field  </p> }
     </div>
 
     <div className="row row-cols-md-3 page">
@@ -69,7 +72,7 @@ function pageDown() {
     <button onClick={pageUp} type="button" className="btn btn-danger">Next page</button>
     </div>
     </div>
-</React.Fragment>
+</>
   );
 }
 
