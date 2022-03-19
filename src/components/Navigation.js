@@ -31,7 +31,7 @@ function Navigation(props) {
     </ul>
     <form className="d-flex">
     {props.search && 
-    <input onChange={execQuery}  className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+    <input onChange={execQuery} value={queryRes}  className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
     }
     </form>
     </div>
