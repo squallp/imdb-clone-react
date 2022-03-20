@@ -2,18 +2,19 @@
 import React, {useEffect, useState} from 'react';
 import {API_KEY, API_URL, MOVIE_URL_PATH, API_KEY_URL_PATH, LANGUAGE_URL_PATH} from '../route';
 import Movie from './Movie';
+import {useSelector} from "react-redux";
 
 function Single(props) {
   const [moviesData, setMoviesData] = useState();
   const movieIDmodal = "modalInfo"+props.id;
+  let languageRes = useSelector((state) => state.language.value);
 
   useEffect(() => {
     getSingleMovie(props.id);
-  }, []);
+  }, [languageRes]);
 
   function getSingleMovie(id) {
-    const fetchUrl = API_URL+MOVIE_URL_PATH+id+API_KEY_URL_PATH+API_KEY+LANGUAGE_URL_PATH;
-    //console.log(fetchUrl);
+    const fetchUrl = API_URL+MOVIE_URL_PATH+id+API_KEY_URL_PATH+API_KEY+LANGUAGE_URL_PATH+languageRes;
 
     if (id) {
       fetch(fetchUrl)

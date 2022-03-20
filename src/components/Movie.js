@@ -64,8 +64,12 @@ function Movie(props) {
 				return (<li key={genres.id}>{genres.name}</li>);
 				 })}
 		</ul></h6>}
-		<h5 className="card-text">Budget: {props.budget > 0 ? "$"+props.budget.toLocaleString() : "No Info"}</h5>
-		<h5 className="card-text">Revenue: {props.budget > 0 ? "$"+props.revenue.toLocaleString() : "No Info"}</h5>
+		{props.budget && 
+			<>
+			<h5 className="card-text">Budget: {props.budget > 0 ? "$"+props.budget.toLocaleString() : "No Info"}</h5>
+			<h5 className="card-text">Revenue: {props.budget > 0 ? "$"+props.revenue.toLocaleString() : "No Info"}</h5>
+			</>
+		}
 		{ props.production_companies  && 
 			<h6 className="card-title">Production companies: 
 			<ul>

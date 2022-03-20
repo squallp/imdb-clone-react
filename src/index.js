@@ -10,11 +10,13 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import favoritesReducer from './reducers/favorites';
 import searchQueryReducer from './reducers/search';
+import languageReducer from './reducers/language';
 
 const store = configureStore({
 	reducer: {
 		favorites: favoritesReducer,
-		searchQuery: searchQueryReducer
+		searchQuery: searchQueryReducer,
+    language: languageReducer
 	}
 })
 

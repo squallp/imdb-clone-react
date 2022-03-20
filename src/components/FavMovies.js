@@ -9,16 +9,17 @@ import {useSelector} from "react-redux";
 function FavMovies() {
   const [favMoviesData, setFavMoviesData] = useState([]);
   let favMovies = useSelector((state) => state.favorites.value);
+  let languageRes = useSelector((state) => state.language.value);
   let preState = [];
 
   useEffect(() => {
      getFavMovies();  
-  }, [favMovies]);  
+  }, [favMovies,languageRes]);  
 
 function getFavMovies() {
      setFavMoviesData([]);
      favMovies.map((movieID, index) => {
-      const fetchUrl = API_URL+MOVIE_URL_PATH+movieID+API_KEY_URL_PATH+API_KEY+LANGUAGE_URL_PATH;
+      const fetchUrl = API_URL+MOVIE_URL_PATH+movieID+API_KEY_URL_PATH+API_KEY+LANGUAGE_URL_PATH+languageRes;
       fetch(fetchUrl)
        .then((res) => res.json())
        .then((res) => {
