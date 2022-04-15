@@ -1,19 +1,10 @@
 import {   Link  } from "react-router-dom";
-import SelectOption from '../components/SelectOption';
-import {useDispatch, useSelector} from "react-redux";
-import {query} from '../reducers/search';
-import {language} from '../reducers/language';
+import SelectLanguage from '../components/SelectLanguage';
+import Search from '../components/Search';
 
 function Navigation(props) {
-    const dispatch = useDispatch();
-    let queryRes = useSelector((state) => state.searchQuery.value);
-
-    function execQuery(val) {
-            dispatch(query(val.target.value))
-    }
-
   return (
-    <div>
+    <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container-fluid">
     <Link to='/' className="navbar-brand">ImDb Clone</Link>
@@ -33,18 +24,16 @@ function Navigation(props) {
     </li>
     </ul>
     
-    <form className="d-flex mb-2">
     {props.search && 
-    <input onChange={execQuery} value={queryRes}  className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <Search />
     }
-    </form>
 
-    <SelectOption />
+    <SelectLanguage />
 
     </div>
     </div>
     </nav>
-    </div>
+    </>
     );
 }
 

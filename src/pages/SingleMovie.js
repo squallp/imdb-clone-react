@@ -7,19 +7,18 @@ const fetchUrl = API_URL+MOVIE_URL_PATH+POPULAR_URL_PATH+API_KEY_URL_PATH+API_KE
 
 function SingleMovie() {
 
-
 	return (
 
-<>
+		<>
 
-<Navigation />
+		<Navigation />
 
-<div className="container-fluid">
-<Single id="634649"/>
+		<div className="container-fluid">
+		<Single id="634649"/>
 
-</div>
-</>
-);
+		</div>
+		</>
+		);
 }
 
 export default SingleMovie;

@@ -4,15 +4,15 @@ import React from 'react';
 
 function FavoriteMovies() {
 	return (
-<>
-<Navigation />
+		<>
+		<Navigation />
 
-<div className="container-fluid">
-<div>
-<FavMovies />
-</div>
-</div>
-</>
-);
+		<div className="container-fluid">
+		<div>
+		<FavMovies />
+		</div>
+		</div>
+		</>
+		);
 }
 export default FavoriteMovies;
